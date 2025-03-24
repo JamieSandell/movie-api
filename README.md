@@ -1,3 +1,4 @@
+
 # movie-api
 
 ## Specification
@@ -20,6 +21,8 @@ Sort movies by title/name or release date
 ## Packages Used
 ### Microsoft.EntityFrameworkCore
 For mapping database objects.
+### Microsoft.EntityFrameworkCore.SqlServer
+EF Core database provider package for Microsoft SQL Server and Azure SQL.
 ### StyleCop.Analyzers
 For keeping a consistent coding style.
 
