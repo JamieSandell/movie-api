@@ -9,7 +9,7 @@ namespace Backend.Migrations
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        {/*
             migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
@@ -20,14 +20,14 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movies", x => x.Id);
-                });
+                });*/
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        {/*
             migrationBuilder.DropTable(
-                name: "Movies");
+                name: "Movies");*/
         }
     }
 }
