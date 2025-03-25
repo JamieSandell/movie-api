@@ -22,7 +22,7 @@ namespace Backend.Services
         }
 
         /// <inheritdoc/>
-        public async Task<List<Movie>> SearchMovieByTitleAsync(string title)
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit)
         {
             return await dbContext.Movies.Where(p => p.Title == title).ToListAsync();
         }
