@@ -20,5 +20,11 @@ namespace Backend.Services
         {
             return await dbContext.Movies.AsNoTracking().ToListAsync();
         }
+
+        /// <inheritdoc/>
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title)
+        {
+            return await dbContext.Movies.Where(p => p.Title == title).ToListAsync();
+        }
     }
 }

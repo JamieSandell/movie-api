@@ -16,5 +16,12 @@ namespace Backend.Services
         /// </summary>
         /// <returns>A list of all the movies.</returns>
         public Task<List<Movie>> GetAllMoviesAsync();
+
+        /// <summary>
+        /// Search for a movie by title asynchronously.
+        /// </summary>
+        /// <param name="title">The title of the movie to search for.</param>
+        /// <returns>A list of movies that match the search.</returns>
+        public Task<List<Movie>> SearchMovieByTitleAsync(string title);
     }
 }
