@@ -23,13 +23,15 @@ namespace Backend.Controllers
         /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
+        /// <param name="pageNumber">The page number to start on.</param>
+        /// <param name="pageSize">Max results to show on the page.</param>
         /// <returns>A list of all the movies.</returns>
         [HttpGet("getallmovies")]
-        public async Task<List<Movie>> GetAllMoviesAsync()
+        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize)
         {
             try
             {
-                return await this.movieService.GetAllMoviesAsync();
+                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize);
             }
             catch
             {
