@@ -36,5 +36,23 @@ namespace Backend.Controllers
                 throw;
             }
         }
+
+        /// <summary>
+        /// Searches a movie by title asynchronously.
+        /// </summary>
+        /// <param name="title">The title of the movie.</param>
+        /// <returns>A list of movies that matched the title.</returns>
+        [HttpGet("searchbytitle")]
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title)
+        {
+            try
+            {
+                return await this.movieService.SearchMovieByTitleAsync(title);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
