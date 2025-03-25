@@ -14,8 +14,10 @@ namespace Backend.Services
         /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
+        /// <param name="pageNumber">Page number to start on.</param>
+        /// <param name="pageSize">Number of items to display per page.</param>
         /// <returns>A list of all the movies.</returns>
-        public Task<List<Movie>> GetAllMoviesAsync();
+        public Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize);
 
         /// <summary>
         /// Search for a movie by title asynchronously.
