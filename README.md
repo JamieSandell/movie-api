@@ -23,6 +23,8 @@ Sort movies by title/name or release date
 For mapping database objects.
 ### Microsoft.EntityFrameworkCore.SqlServer
 EF Core database provider package for Microsoft SQL Server and Azure SQL.
+### Microsoft.EntityFrameworkCore.Tools
+For commands for the Package Manager Console.
 ### StyleCop.Analyzers
 For keeping a consistent coding style.
 
