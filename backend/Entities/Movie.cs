@@ -13,11 +13,11 @@ namespace Backend.Entities
     public class Movie
     {
         /// <summary>
-        /// Gets the unique id of the movie in the DB.
+        /// Gets or sets the unique id of the movie in the DB.
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets the movie's release date.
