@@ -1,20 +1,20 @@
-﻿// <copyright file="IMovieRepository.cs" company="Jamie Sandell">
+﻿// <copyright file="IMovieService.cs" company="Jamie Sandell">
 // Copyright (c) Jamie Sandell. All rights reserved.
 // </copyright>
 
-namespace Backend.Repositories
+namespace Backend.Services
 {
     using Backend.Entities;
 
     /// <summary>
-    /// Interface for the movie services.
+    /// Interface for the movie service.
     /// </summary>
-    public interface IMovieServices
+    public interface IMovieService
     {
         /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
         /// <returns>A list of all the movies</returns>
-        Task<List<Movie>> GetAllMoviesAsync();
+        public Task<List<Movie>> GetAllMoviesAsync();
     }
 }
