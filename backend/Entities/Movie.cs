@@ -22,7 +22,7 @@ namespace Backend.Entities
         /// <summary>
         /// Gets the movie's release date.
         /// </summary>
-        public DateOnly ReleaseDate { get; set; }
+        public DateOnly? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets the movie's title.
