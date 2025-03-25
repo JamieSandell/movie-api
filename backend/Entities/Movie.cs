@@ -4,6 +4,8 @@
 
 namespace Backend.Entities
 {
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>
     /// The movie class.
     /// </summary>
@@ -12,6 +14,7 @@ namespace Backend.Entities
         /// <summary>
         /// Gets the unique id of the movie in the DB.
         /// </summary>
+        [Key]
         public int Id { get; }
 
         /// <summary>
