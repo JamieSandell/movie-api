@@ -24,6 +24,11 @@ namespace Backend.Services
         /// <inheritdoc/>
         public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit)
         {
+            if (searchLimit < 1)
+            {
+                searchLimit = 1;
+            }
+
             return await dbContext.Movies.
                 Where(p => p.Title == title)
                 .Take(searchLimit)
