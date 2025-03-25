@@ -25,13 +25,14 @@ namespace Backend.Controllers
         /// </summary>
         /// <param name="pageNumber">The page number to start on.</param>
         /// <param name="pageSize">Max results to show on the page.</param>
+        /// <param name="genre">The genre to filter on. Empty string to ignore.</param>
         /// <returns>A list of all the movies.</returns>
         [HttpGet("getallmovies")]
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize)
+        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre)
         {
             try
             {
-                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize);
+                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize, genre);
             }
             catch
             {
@@ -44,13 +45,14 @@ namespace Backend.Controllers
         /// </summary>
         /// <param name="title">The title of the movie.</param>
         /// <param name="searchLimit">Limit the number of search results.</param>
+        /// <param name="genre">The genre to filter on. Empty string to ignore.</param>
         /// <returns>A list of movies that matched the title.</returns>
         [HttpGet("searchbytitle")]
-        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit)
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit, string? genre)
         {
             try
             {
-                return await this.movieService.SearchMovieByTitleAsync(title, searchLimit);
+                return await this.movieService.SearchMovieByTitleAsync(title, searchLimit, genre);
             }
             catch
             {

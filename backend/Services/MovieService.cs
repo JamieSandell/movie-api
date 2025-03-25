@@ -16,7 +16,7 @@ namespace Backend.Services
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         /// <inheritdoc/>
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string genre)
+        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre)
         {
             if (pageNumber < 1)
             {
@@ -28,7 +28,7 @@ namespace Backend.Services
                 pageSize = 1;
             }
 
-            if (genre == default)
+            if (genre == null)
             {
                 return await dbContext.Movies.
                 AsNoTracking()
@@ -48,14 +48,14 @@ namespace Backend.Services
         }
 
         /// <inheritdoc/>
-        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit, string genre)
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit, string? genre)
         {
             if (searchLimit < 1)
             {
                 searchLimit = 1;
             }
 
-            if (genre == default)
+            if (genre == null)
             {
                 return await dbContext.Movies.
                 AsNoTracking()
