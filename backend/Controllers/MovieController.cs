@@ -41,13 +41,14 @@ namespace Backend.Controllers
         /// Searches a movie by title asynchronously.
         /// </summary>
         /// <param name="title">The title of the movie.</param>
+        /// <param name="searchLimit">Limit the number of search results.</param>
         /// <returns>A list of movies that matched the title.</returns>
         [HttpGet("searchbytitle")]
-        public async Task<List<Movie>> SearchMovieByTitleAsync(string title)
+        public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit)
         {
             try
             {
-                return await this.movieService.SearchMovieByTitleAsync(title);
+                return await this.movieService.SearchMovieByTitleAsync(title, searchLimit);
             }
             catch
             {
