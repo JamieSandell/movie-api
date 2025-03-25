@@ -31,17 +31,5 @@ For keeping a consistent coding style.
 When using the data import wizard for flat files in SSMS it gave a warning about having had to drop 12 rows.
 In production you'd want to have a staging table and use a config table for screening rules to alert the appropriate people of a failed import that tells them which rules the file failed on.
 For the sake of brevity this hasn't been done and we're working with 9837 rows instead of 9849.
-### Repositories
-Only one repository, so following KISS, but if there were more then it would be worthwhile to have a generic repository, akin to:
-```csharp
-public partial interface IRepository<T> where T : BaseEntity
-{
-    T GetById(object id);
-    void Insert(T entity);
-    void Update(T entity);
-    void Delete(T entity);
-    IQueryable<T> Table { get; }
-}
-```
 
 > Written with [StackEdit](https://stackedit.io/).

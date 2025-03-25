@@ -7,9 +7,9 @@ namespace Backend.Repositories
     using Backend.Entities;
 
     /// <summary>
-    /// Interface for the movie repository.
+    /// Interface for the movie services.
     /// </summary>
-    public interface IMovieRepository
+    public interface IMovieServices
     {
         /// <summary>
         /// Get all the movies asynchronously.
