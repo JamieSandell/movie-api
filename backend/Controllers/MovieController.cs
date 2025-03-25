@@ -14,7 +14,9 @@ namespace Backend.Controllers
     /// <param name="movieService">The movie service.</param>
     [Route("api/[controller]")]
     [ApiController]
+#pragma warning disable SA1009 // Closing parenthesis should be spaced correctly
     public class MovieController(IMovieService movieService) : ControllerBase
+#pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         private readonly IMovieService movieService = movieService;
 
