@@ -18,7 +18,6 @@ namespace Backend.Services
         /// <inheritdoc/>
         public async Task<List<Movie>> GetAllMoviesAsync()
         {
-            var test = dbContext.Movies.AsNoTracking().ToList();//Async();
             return await dbContext.Movies.AsNoTracking().ToListAsync();
         }
     }
