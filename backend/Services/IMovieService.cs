@@ -17,8 +17,9 @@ namespace Backend.Services
         /// <param name="pageNumber">Page number to start on.</param>
         /// <param name="pageSize">Number of items to display per page.</param>
         /// <param name="genre">Genre to filter on, null to ignore.</param>
+        /// <param name="actor">Actor to filter on, delimit with ;.</param>
         /// <returns>A list of all the movies.</returns>
-        public Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre);
+        public Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor);
 
         /// <summary>
         /// Search for a movie by title asynchronously.

@@ -16,7 +16,7 @@ namespace Backend.Services
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         /// <inheritdoc/>
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre)
+        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor)
         {
             if (pageNumber < 1)
             {
@@ -28,23 +28,23 @@ namespace Backend.Services
                 pageSize = 1;
             }
 
-            if (genre == null)
-            {
-                return await dbContext.Movies.
-                AsNoTracking()
-                .OrderBy(p => p.Id)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
+            return await dbContext.Movies
+                .FromSql($@"SELECT *
+                            FROM Movies
+                            WHERE
+                                (
+                                    {genre} IS NULL
+                                    OR {genre} IN (SELECT LTRIM(VALUE) FROM STRING_SPLIT(Genre, ','))
+                                )
+                                AND
+                                (
+                                    {actor} IS NULL
+                                    OR {actor} IN (SELECT LTRIM(VALUE) FROM STRING_SPLIT(Actors, ','))
+                                )
+                            ORDER BY Id
+                            OFFSET ({pageNumber - 1}) * {pageSize} ROWS
+                            FETCH NEXT {pageSize} ROWS ONLY")
                 .ToListAsync();
-            }
-
-            return await dbContext.Movies.
-               AsNoTracking()
-               .OrderBy(p => p.Id)
-               .Where(p => p.Genre == genre)
-               .Skip((pageNumber - 1) * pageSize)
-               .Take(pageSize)
-               .ToListAsync();
         }
 
         /// <inheritdoc/>
