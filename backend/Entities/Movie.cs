@@ -22,46 +22,46 @@ namespace Backend.Entities
         /// <summary>
         /// Gets the movie's release date.
         /// </summary>
-        public DateOnly ReleaseDate { get; }
+        public DateOnly ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets the movie's title.
         /// </summary>
-        public string? Title { get; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets the movie's overview.
         /// </summary>
-        public string? Overview { get; }
+        public string? Overview { get; set; }
 
         /// <summary>
         /// Gets the movie's popularity.
         /// </summary>
-        public float Popularity { get; }
+        public float? Popularity { get; set; }
 
         /// <summary>
         /// Gets the movie's vote count.
         /// </summary>
-        public short VoteCount { get; }
+        public short? VoteCount { get; set; }
 
         /// <summary>
         /// Gets the movie's vote average.
         /// </summary>
-        public float VoteAverage { get; }
+        public float? VoteAverage { get; set; }
 
         /// <summary>
         /// Gets the movie's original language.
         /// </summary>
-        public string? OriginalLanguage { get; }
+        public string? OriginalLanguage { get; set; }
 
         /// <summary>
         /// Gets the movie's genre.
         /// </summary>
-        public string? Genre { get; }
+        public string? Genre { get; set; }
 
         /// <summary>
         /// Gets the movie's poster URL.
         /// </summary>
-        public string? PosterURL { get; }
+        public string? PosterURL { get; set; }
     }
 }
