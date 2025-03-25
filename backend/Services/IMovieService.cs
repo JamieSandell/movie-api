@@ -14,7 +14,7 @@ namespace Backend.Services
         /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
-        /// <returns>A list of all the movies</returns>
+        /// <returns>A list of all the movies.</returns>
         public Task<List<Movie>> GetAllMoviesAsync();
     }
 }
