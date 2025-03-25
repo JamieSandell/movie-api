@@ -44,6 +44,7 @@ namespace Backend.Services
                             ORDER BY Id
                             OFFSET ({pageNumber - 1}) * {pageSize} ROWS
                             FETCH NEXT {pageSize} ROWS ONLY")
+                .AsNoTracking()
                 .ToListAsync();
         }
 
