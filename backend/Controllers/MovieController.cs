@@ -29,11 +29,11 @@ namespace Backend.Controllers
         /// <param name="actor">Actor to filter on, delimit with ;.</param>
         /// <returns>A list of all the movies.</returns>
         [HttpGet("getallmovies")]
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor)
+        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor, bool sortByTitle)
         {
             try
             {
-                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize, genre, actor);
+                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize, genre, actor, sortByTitle);
             }
             catch
             {
