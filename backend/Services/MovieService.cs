@@ -16,7 +16,14 @@ namespace Backend.Services
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         /// <inheritdoc/>
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor, bool sortByTitle)
+        public async Task<List<Movie>> GetAllMoviesAsync(
+            int pageNumber,
+            int pageSize,
+            string? genre,
+            string? actor,
+            bool sortByTitle,
+            bool sortByReleaseDate,
+            bool descending)
         {
             if (pageNumber < 1)
             {
@@ -42,7 +49,11 @@ namespace Backend.Services
                                     OR {actor} IN (SELECT LTRIM(VALUE) FROM STRING_SPLIT(Actors, ','))
                                 )
                             ORDER BY
-                                CASE WHEN {sortByTitle} = 1 THEN Title END
+                                CASE
+                                    --WHEN {sortByTitle} = 1 THEN TRY_CAST(Title AS NVARCHAR(MAX))
+                                    WHEN {sortByReleaseDate} = 1 THEN TRY_CONVERT(DATETIME, ReleaseDate, 23)
+                                ELSE Id
+                                END
                             OFFSET ({pageNumber - 1}) * {pageSize} ROWS
                             FETCH NEXT {pageSize} ROWS ONLY")
                 .AsNoTracking()

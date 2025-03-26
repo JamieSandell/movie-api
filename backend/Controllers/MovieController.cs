@@ -27,13 +27,23 @@ namespace Backend.Controllers
         /// <param name="pageSize">Max results to show on the page.</param>
         /// <param name="genre">The genre to filter on. Empty string to ignore.</param>
         /// <param name="actor">Actor to filter on, delimit with ;.</param>
+        /// <param name="sortByTitle">Sort by title flag.</param>
+        /// <param name="sortByReleaseDate">Sort by release date flag.</param>
+        /// <param name="descending">Sort by descending flag.</param>
         /// <returns>A list of all the movies.</returns>
         [HttpGet("getallmovies")]
-        public async Task<List<Movie>> GetAllMoviesAsync(int pageNumber, int pageSize, string? genre, string? actor, bool sortByTitle)
+        public async Task<List<Movie>> GetAllMoviesAsync(
+            int pageNumber,
+            int pageSize,
+            string? genre,
+            string? actor,
+            bool sortByTitle,
+            bool sortByReleaseDate,
+            bool descending)
         {
             try
             {
-                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize, genre, actor, sortByTitle);
+                return await this.movieService.GetAllMoviesAsync(pageNumber, pageSize, genre, actor, sortByTitle, sortByReleaseDate, descending);
             }
             catch
             {
