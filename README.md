@@ -1,5 +1,11 @@
 
+
 # movie-api
+
+## Demo
+[Get All Movies with Pagination and Filters](https://1drv.ms/v/s!Aj71ROvXuJl_n8xwsOMcokJOFDV3Jg?e=KPgMp7)
+
+[Search by Title with Search Result Limit](https://1drv.ms/v/s!Aj71ROvXuJl_n8wdjR_A_TL9oWbA5Q?e=77nkdw)
 
 ## Specification
 ### The Task
