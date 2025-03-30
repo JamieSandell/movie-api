@@ -6,6 +6,7 @@ namespace Backend.Controllers
 {
     using Backend.Entities;
     using Backend.Services;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -32,6 +33,7 @@ namespace Backend.Controllers
         /// <param name="descending">Sort by descending flag.</param>
         /// <returns>A list of all the movies.</returns>
         [HttpGet("getallmovies")]
+        [AllowAnonymous]
         public async Task<List<Movie>> GetAllMoviesAsync(
             int pageNumber,
             int pageSize,
@@ -59,6 +61,7 @@ namespace Backend.Controllers
         /// <param name="genre">The genre to filter on. Empty string to ignore.</param>
         /// <returns>A list of movies that matched the title.</returns>
         [HttpGet("searchbytitle")]
+        [AllowAnonymous]
         public async Task<List<Movie>> SearchMovieByTitleAsync(string title, int searchLimit, string? genre)
         {
             try

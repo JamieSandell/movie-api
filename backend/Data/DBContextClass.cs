@@ -28,7 +28,7 @@ namespace Backend.Data
         /// <param name="optionsBuilder">The config.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("DatabaseConnection"));
         }
     }
 }

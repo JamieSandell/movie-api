@@ -33,11 +33,12 @@ namespace Backend
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment()) not recommended to comment out, but just for demo purposes.
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+                app.UseDeveloperExceptionPage();
+            //}
 
             app.UseHttpsRedirection();
 
