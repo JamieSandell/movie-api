@@ -1,5 +1,3 @@
-
-
 # movie-api
 
 ## Demo
