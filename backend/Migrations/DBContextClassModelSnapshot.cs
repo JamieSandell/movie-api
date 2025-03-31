@@ -22,7 +22,7 @@ namespace Backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Backend.Entities.Movie", b =>
+            modelBuilder.Entity("Backend.Entities.RawMovie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
