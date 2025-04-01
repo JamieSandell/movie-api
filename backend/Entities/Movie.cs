@@ -57,7 +57,9 @@ namespace Backend.Entities
         /// <summary>
         /// Gets the navigation property for Genre.
         /// </summary>
-        public List<Genre>? Genres { get; }
+#pragma warning disable SA1010 // Opening square brackets should be spaced correctly
+        public List<Genre> Genres { get; } = [];
+#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
 
         /// <summary>
         /// Gets or sets the movie's poster URL.

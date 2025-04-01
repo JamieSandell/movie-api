@@ -72,8 +72,9 @@ namespace Backend.Services
             {
                 return await dbContext.Movies.
                 AsNoTracking()
-                .OrderBy(p => p.Id)
-                .Where(p => p.Title == title)
+                .Include(movie => movie.Genres)
+                .OrderBy(movie => movie.Id)
+                .Where(movie => movie.Title == title)
                 .Take(searchLimit)
                 .ToListAsync();
             }
