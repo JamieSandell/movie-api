@@ -78,10 +78,10 @@ namespace Backend.Services
                 .ToListAsync();
             }
 
-            return await dbContext.Movies.
-                AsNoTracking()
+            return await dbContext.Movies
+                .AsNoTracking()
                 .OrderBy(p => p.Id)
-                .Where(p => p.Title == title && p.Genre == genre)
+                .Where(p => p.Title == title && p.Genres!.Any(g => g.Description == genre))
                 .Take(searchLimit)
                 .ToListAsync();
         }

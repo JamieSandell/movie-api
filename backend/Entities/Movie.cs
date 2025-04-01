@@ -55,9 +55,9 @@ namespace Backend.Entities
         public string? OriginalLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the movie's genre.
+        /// Gets the navigation property for Genre.
         /// </summary>
-        public string? Genre { get; set; }
+        public List<Genre>? Genres { get; }
 
         /// <summary>
         /// Gets or sets the movie's poster URL.
@@ -65,8 +65,8 @@ namespace Backend.Entities
         public string? PosterURL { get; set; }
 
         /// <summary>
-        /// Gets or sets the movie's actors.
+        /// Gets the navigation property for Actor.
         /// </summary>
-        public string? Actors { get; set; }
+        public List<Actor>? Actors { get; }
     }
 }

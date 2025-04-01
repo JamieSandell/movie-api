@@ -67,6 +67,6 @@ namespace Backend.Entities
         /// <summary>
         /// Gets or sets the movie's actors.
         /// </summary>
-        public string? Actors { get; set; }
+        public string? Actor { get; set; }
     }
 }
