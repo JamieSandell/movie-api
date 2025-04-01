@@ -23,6 +23,11 @@ namespace Backend.Data
         public DbSet<Movie> Movies { get; set; }
 
         /// <summary>
+        /// Gets or sets the moviesraw.
+        /// </summary>
+        public DbSet<MovieRaw> MoviesRaw { get; set; }
+
+        /// <summary>
         /// Gets or sets the genres.
         /// </summary>
         public DbSet<Genre> Genres { get; set; }
@@ -38,7 +43,7 @@ namespace Backend.Data
         /// <param name="optionsBuilder">The config.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("AzureConnection"));
+            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("LocalConnection"));
         }
 
         /// <summary>
