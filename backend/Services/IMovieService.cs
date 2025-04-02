@@ -12,6 +12,14 @@ namespace Backend.Services
     public interface IMovieService
     {
         /// <summary>
+        /// Search the movies.
+        /// </summary>
+        /// <param name="title">Search by title.</param>
+        /// <returns>The search result.</returns>
+        public Task<List<Movie>> Search(
+            string? title);
+
+        /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
         /// <param name="pageNumber">Page number to start on.</param>

@@ -16,6 +16,17 @@ namespace Backend.Services
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         /// <inheritdoc/>
+        public async Task<List<Movie>> Search(
+            string? title)
+        {
+            return await dbContext.Movies
+                .AsNoTracking()
+                .Include(movie => movie.Genres)
+                .Where(movie => (title == null || movie.Title == title))
+                .ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public async Task<List<Movie>> GetAllMoviesAsync(
             int pageNumber,
             int pageSize,

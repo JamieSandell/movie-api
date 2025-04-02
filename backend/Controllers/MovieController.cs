@@ -22,6 +22,24 @@ namespace Backend.Controllers
         private readonly IMovieService movieService = movieService;
 
         /// <summary>
+        /// Search the movies dataset.
+        /// </summary>
+        /// <param name="title">The title to search for, search all titles if blank.</param>
+        /// <returns>The search result.</returns>
+        [HttpGet("search")]
+        public async Task<List<Movie>> Search(string? title)
+        {
+            try // TODO: exception handling
+            {
+                return await this.movieService.Search(title);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Get all the movies asynchronously.
         /// </summary>
         /// <param name="pageNumber">The page number to start on.</param>
