@@ -20,17 +20,35 @@ namespace Backend.Services
             string? title,
             int? maxResults,
             string? genre,
+            string? actor,
+            string? orderBy,
+            bool orderByDescending,
             int pageNumber,
             int pageSize)
         {
             var query = dbContext.Movies
                 .AsNoTracking()
                 .Include(movie => movie.Genres)
-                .OrderBy(movie => movie.Title)
                 .Where(movie =>
                     (title == null || movie.Title == title)
-                    && (genre == null || movie.Genres.Any(genres => genres.Description == genre)))
+                    && (genre == null || movie.Genres.Any(genres => genres.Description == genre))
+                    && (actor == null || movie.Actors.Any(actors => actors.Name == actor)))
                 .Take(maxResults ?? int.MaxValue); // TODO: maxResults should be, at most, the count of the data.
+
+            string orderByUpper = (orderBy ?? string.Empty).ToUpper();
+
+            switch (orderByUpper)
+            {
+                case "TITLE":
+                    query = orderByDescending ? query.OrderByDescending(movie => movie.Title) : query.OrderBy(movie => movie.Title); // TODO: Helper method?
+                    break;
+                case "DATE":
+                    query = orderByDescending ? query.OrderByDescending(movie => movie.ReleaseDate) : query.OrderBy(movie => movie.ReleaseDate);
+                    break;
+                default:
+                    query = orderByDescending ? query.OrderByDescending(movie => movie.Id) : query.OrderBy(movie => movie.Id);
+                    break;
+            }
 
             return await query
                 .Skip((pageNumber - 1) * pageSize) // TODO: don't allow paging out the bounds of the data.

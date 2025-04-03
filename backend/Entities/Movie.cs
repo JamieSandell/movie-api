@@ -69,6 +69,8 @@ namespace Backend.Entities
         /// <summary>
         /// Gets the navigation property for Actor.
         /// </summary>
-        public List<Actor>? Actors { get; }
+#pragma warning disable SA1010 // Opening square brackets should be spaced correctly
+        public List<Actor> Actors { get; } = [];
+#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
     }
 }

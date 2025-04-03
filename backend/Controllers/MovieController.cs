@@ -27,6 +27,9 @@ namespace Backend.Controllers
         /// <param name="title">The title to search for, search all titles if blank.</param>
         /// <param name="maxResults">Maximum number of results to return.</param>
         /// <param name="genre">Genre to filter on.</param>
+        /// <param name="actor">Actor to filter on.</param>
+        /// <param name="orderBy">Order by "Title" or "Date", otherwise orders by Id by default.</param>
+        /// <param name="orderByDescending">Order by descending or ascending.</param>
         /// <param name="pageNumber">Page number to start on, 1 by default.</param>
         /// <param name="pageSize">Number of items per page, 10 by default.</param>
         /// <returns>The search result.</returns>
@@ -35,6 +38,9 @@ namespace Backend.Controllers
             string? title,
             int? maxResults,
             string? genre,
+            string? actor,
+            string? orderBy,
+            bool orderByDescending = false,
             int pageNumber = 1,
             int pageSize = 10)
         {
@@ -44,6 +50,9 @@ namespace Backend.Controllers
                     title,
                     maxResults,
                     genre,
+                    actor,
+                    orderBy,
+                    orderByDescending,
                     pageNumber,
                     pageSize);
             }
