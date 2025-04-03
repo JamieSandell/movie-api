@@ -25,6 +25,7 @@ namespace Backend.Services
             return await dbContext.Movies
                 .AsNoTracking()
                 .Include(movie => movie.Genres)
+                .OrderBy(movie => movie.Title)
                 .Where(movie => (title == null || movie.Title == title))
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
