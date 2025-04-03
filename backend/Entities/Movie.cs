@@ -27,7 +27,7 @@ namespace Backend.Entities
         /// <summary>
         /// Gets or sets the movie's title.
         /// </summary>
-        public string? Title { get; set; }
+        public string? Title { get; set; } // TODO: index
 
         /// <summary>
         /// Gets or sets the movie's overview.

@@ -15,9 +15,11 @@ namespace Backend.Services
         /// Search the movies.
         /// </summary>
         /// <param name="title">Search by title.</param>
+        /// <param name="maxResults">Maximum number of search results to return.</param>
         /// <returns>The search result.</returns>
         public Task<List<Movie>> Search(
-            string? title);
+            string? title,
+            int? maxResults);
 
         /// <summary>
         /// Get all the movies asynchronously.

@@ -25,13 +25,18 @@ namespace Backend.Controllers
         /// Search the movies dataset.
         /// </summary>
         /// <param name="title">The title to search for, search all titles if blank.</param>
+        /// <param name="maxResults">Maximum number of results to return.</param>
         /// <returns>The search result.</returns>
         [HttpGet("search")]
-        public async Task<List<Movie>> Search(string? title)
+        public async Task<List<Movie>> Search(
+            string? title,
+            int? maxResults)
         {
             try // TODO: exception handling
             {
-                return await this.movieService.Search(title);
+                return await this.movieService.Search(
+                    title,
+                    maxResults);
             }
             catch
             {
