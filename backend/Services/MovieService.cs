@@ -18,13 +18,16 @@ namespace Backend.Services
         /// <inheritdoc/>
         public async Task<List<Movie>> Search(
             string? title,
-            int? maxResults)
+            int? maxResults,
+            int pageNumber,
+            int pageSize)
         {
             return await dbContext.Movies
                 .AsNoTracking()
                 .Include(movie => movie.Genres)
                 .Where(movie => (title == null || movie.Title == title))
-                .Take(maxResults ?? int.MaxValue)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 

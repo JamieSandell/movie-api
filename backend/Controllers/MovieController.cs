@@ -26,17 +26,23 @@ namespace Backend.Controllers
         /// </summary>
         /// <param name="title">The title to search for, search all titles if blank.</param>
         /// <param name="maxResults">Maximum number of results to return.</param>
+        /// <param name="pageNumber">Page number to start on, 1 by default.</param>
+        /// <param name="pageSize">Number of items per page, 10 by default.</param>
         /// <returns>The search result.</returns>
         [HttpGet("search")]
         public async Task<List<Movie>> Search(
             string? title,
-            int? maxResults)
+            int? maxResults,
+            int pageNumber = 1,
+            int pageSize = 10)
         {
             try // TODO: exception handling
             {
-                return await this.movieService.Search(
+                return await this.movieService.Search( // TODO: Use model binding for optional parameters
                     title,
-                    maxResults);
+                    maxResults,
+                    pageNumber,
+                    pageSize);
             }
             catch
             {
