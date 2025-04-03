@@ -22,11 +22,14 @@ namespace Backend.Services
             int pageNumber,
             int pageSize)
         {
-            return await dbContext.Movies
+            var query = dbContext.Movies
                 .AsNoTracking()
                 .Include(movie => movie.Genres)
                 .OrderBy(movie => movie.Title)
                 .Where(movie => (title == null || movie.Title == title))
+                .Take(maxResults ?? int.MaxValue);
+
+            return await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
