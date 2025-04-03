@@ -19,6 +19,7 @@ namespace Backend.Services
         public async Task<List<Movie>> Search(
             string? title,
             int? maxResults,
+            string? genre,
             int pageNumber,
             int pageSize)
         {
@@ -26,11 +27,13 @@ namespace Backend.Services
                 .AsNoTracking()
                 .Include(movie => movie.Genres)
                 .OrderBy(movie => movie.Title)
-                .Where(movie => (title == null || movie.Title == title))
-                .Take(maxResults ?? int.MaxValue);
+                .Where(movie =>
+                    (title == null || movie.Title == title)
+                    && (genre == null || movie.Genres.Any(genres => genres.Description == genre)))
+                .Take(maxResults ?? int.MaxValue); // TODO: maxResults should be, at most, the count of the data.
 
             return await query
-                .Skip((pageNumber - 1) * pageSize)
+                .Skip((pageNumber - 1) * pageSize) // TODO: don't allow paging out the bounds of the data.
                 .Take(pageSize)
                 .ToListAsync();
         }
