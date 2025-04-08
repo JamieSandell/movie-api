@@ -37,18 +37,12 @@ namespace Backend.Services
 
             string orderByUpper = (orderBy ?? string.Empty).ToUpper();
 
-            switch (orderByUpper)
+            query = orderByUpper switch
             {
-                case "TITLE":
-                    query = orderByDescending ? query.OrderByDescending(movie => movie.Title) : query.OrderBy(movie => movie.Title); // TODO: Helper method?
-                    break;
-                case "DATE":
-                    query = orderByDescending ? query.OrderByDescending(movie => movie.ReleaseDate) : query.OrderBy(movie => movie.ReleaseDate);
-                    break;
-                default:
-                    query = orderByDescending ? query.OrderByDescending(movie => movie.Id) : query.OrderBy(movie => movie.Id);
-                    break;
-            }
+                "TITLE" => orderByDescending ? query.OrderByDescending(movie => movie.Title) : query.OrderBy(movie => movie.Title), // TODO: Helper method?
+                "DATE" => orderByDescending ? query.OrderByDescending(movie => movie.ReleaseDate) : query.OrderBy(movie => movie.ReleaseDate),
+                _ => orderByDescending ? query.OrderByDescending(movie => movie.Id) : query.OrderBy(movie => movie.Id),
+            };
 
             return await query
                 .Skip((pageNumber - 1) * pageSize) // TODO: don't allow paging out the bounds of the data.
