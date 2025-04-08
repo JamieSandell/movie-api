@@ -6,8 +6,8 @@ namespace Backend.Controllers
 {
     using Backend.Entities;
     using Backend.Services;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.IdentityModel.Tokens;
 
     /// <summary>
     /// The movie controller.
@@ -32,9 +32,11 @@ namespace Backend.Controllers
         /// <param name="orderByDescending">Order by descending or ascending.</param>
         /// <param name="pageNumber">Page number to start on, 1 by default.</param>
         /// <param name="pageSize">Number of items per page, 10 by default.</param>
-        /// <returns>The search result.</returns>
+        /// <returns>The search notFound.</returns>
         [HttpGet("search")]
-        public async Task<List<Movie>> Search(
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<Movie>>> Search(
             string? title,
             int? maxResults,
             string? genre,
@@ -46,8 +48,8 @@ namespace Backend.Controllers
         {
             try // TODO: exception handling
             {
-                return await this.movieService.Search( // TODO: Use model binding for optional parameters
-                    title,
+                var movies = await this.movieService.Search( // TODO: Use model binding for optional parameters
+                    title, // TODO: Create filter class
                     maxResults,
                     genre,
                     actor,
@@ -55,6 +57,10 @@ namespace Backend.Controllers
                     orderByDescending,
                     pageNumber,
                     pageSize);
+
+                bool notFound = movies.IsNullOrEmpty();
+
+                return notFound ? this.NotFound() : movies;
             }
             catch
             {

@@ -33,6 +33,7 @@ namespace Backend
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            // TODO: Uncomment.
             //if (app.Environment.IsDevelopment()) not recommended to comment out, but just for demo purposes.
             //{
                 app.UseSwagger();
