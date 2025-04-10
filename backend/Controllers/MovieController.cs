@@ -36,7 +36,7 @@ namespace Backend.Controllers
         [HttpGet("search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<Movie>>> Search(
+        public async Task<ActionResult<IList<Movie>>> Search(
             string? title,
             int? maxResults,
             string? genre,
@@ -60,7 +60,7 @@ namespace Backend.Controllers
 
                 bool notFound = movies.IsNullOrEmpty();
 
-                return notFound ? this.NotFound() : movies;
+                return notFound ? this.NotFound() : this.Ok(movies.ToList());
             }
             catch
             {

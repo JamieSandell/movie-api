@@ -5,6 +5,7 @@
 namespace Backend.Services
 {
     using Backend.Entities;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// Interface for the movie service.
@@ -23,7 +24,7 @@ namespace Backend.Services
         /// <param name="pageNumber">Page number to start on for pagination.</param>
         /// <param name="pageSize">Number of rows per page.</param>
         /// <returns>The search result.</returns>
-        public Task<List<Movie>> Search(
+        public Task<IList<Movie>> Search(
             string? title,
             int? maxResults,
             string? genre,

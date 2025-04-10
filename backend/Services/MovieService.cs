@@ -4,8 +4,10 @@
 
 namespace Backend.Services
 {
+    using System.Threading.Tasks;
     using Backend.Data;
     using Backend.Entities;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
@@ -16,7 +18,7 @@ namespace Backend.Services
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         /// <inheritdoc/>
-        public async Task<List<Movie>> Search(
+        public async Task<IList<Movie>> Search(
             string? title,
             int? maxResults,
             string? genre,
