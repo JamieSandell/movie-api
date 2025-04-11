@@ -4,8 +4,12 @@
 
 namespace Backend
 {
+    using Backend.Config;
     using Backend.Data;
     using Backend.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// The Program and main entry point.
@@ -19,11 +23,13 @@ namespace Backend
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            string connectionString = builder.Configuration.GetConnectionString("LocalConnection") ?? // TODO: Change to Azure
+                 throw new InvalidOperationException("Connection string 'LocalConnection'" +
+                " not found.");
 
             // Add services to the container.
             builder.Services.AddScoped<IMovieService, MovieService>();
-            builder.Services.AddDbContext<DBContextClass>();
-
+            builder.Services.AddDbContext<DBContextClass>(options => options.UseSqlServer(connectionString));
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -31,6 +37,8 @@ namespace Backend
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            GlobalConfig.Configuration = app.Services.GetService<IConfiguration>();
 
             // Configure the HTTP request pipeline.
             // TODO: Uncomment.

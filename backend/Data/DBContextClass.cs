@@ -4,18 +4,34 @@
 
 namespace Backend.Data
 {
+    using Backend.Config;
     using Backend.Entities;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Database connection to the data.
     /// </summary>
-    /// <param name="configuration">Connection config.</param>
-#pragma warning disable SA1009 // Closing parenthesis should be spaced correctly
-    public class DBContextClass(IConfiguration configuration) : DbContext
-#pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
+    public class DBContextClass : DbContext
     {
-        private readonly IConfiguration configuration = configuration;
+        private readonly bool isMigration = false;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DBContextClass"/> class.
+        /// Used for migrations.
+        /// </summary>
+        public DBContextClass()
+        {
+            this.isMigration = true;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DBContextClass"/> class.
+        /// </summary>
+        /// <param name="options">The config options.</param>
+        public DBContextClass(DbContextOptions<DBContextClass> options)
+            : base(options)
+        {
+        }
 
         /// <summary>
         /// Gets or sets the movies.
@@ -43,7 +59,14 @@ namespace Backend.Data
         /// <param name="optionsBuilder">The config.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("LocalConnection"));
+            if (this.isMigration)
+            {
+                _ = optionsBuilder.UseSqlServer(Microsoft
+                   .Extensions
+                   .Configuration
+                   .ConfigurationExtensions
+                   .GetConnectionString(GlobalConfig.Configuration, "LocalConnection")); // TODO: Change to test connection
+            }
         }
 
         /// <summary>
