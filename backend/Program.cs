@@ -55,6 +55,15 @@ namespace Backend
 
             app.MapControllers();
 
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/error-development");
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+
             app.Run();
         }
     }
