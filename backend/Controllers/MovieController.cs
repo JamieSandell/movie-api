@@ -35,7 +35,7 @@ namespace Backend.Controllers
                 return this.NotFound();
             }
 
-            var exceptionHandlerFeature = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            var exceptionHandlerFeature = this.HttpContext.Features.Get<IExceptionHandlerFeature>() !;
 
             return this.Problem(
                 detail: exceptionHandlerFeature.Error.StackTrace,

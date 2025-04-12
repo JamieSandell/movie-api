@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿// <copyright file="20250412053247_Indexes.cs" company="Jamie Sandell">
+// Copyright (c) Jamie Sandell. All rights reserved.
+// </copyright>
+
+#pragma warning disable SA1200 // Using directives should be placed correctly
+using Microsoft.EntityFrameworkCore.Migrations;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 #nullable disable
 

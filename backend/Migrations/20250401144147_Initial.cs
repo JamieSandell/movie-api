@@ -1,5 +1,14 @@
-﻿using System;
+﻿// <copyright file="20250401144147_Initial.cs" company="Jamie Sandell">
+// Copyright (c) Jamie Sandell. All rights reserved.
+// </copyright>
+
+#pragma warning disable SA1200 // Using directives should be placed correctly
+using System;
+#pragma warning restore SA1200 // Using directives should be placed correctly
+#pragma warning restore SA1633 // File should have header
+#pragma warning disable SA1200 // Using directives should be placed correctly
 using Microsoft.EntityFrameworkCore.Migrations;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 #nullable disable
 
@@ -9,6 +18,7 @@ namespace Backend.Migrations
     public partial class Initial : Migration
     {
         /// <inheritdoc />
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1413:Use trailing comma in multi-line initializers", Justification = "Migration file")]
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
