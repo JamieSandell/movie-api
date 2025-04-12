@@ -6,6 +6,7 @@ namespace Backend.Controllers
 {
     using Backend.Entities;
     using Backend.Services;
+    using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
 
@@ -20,6 +21,33 @@ namespace Backend.Controllers
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
     {
         private readonly IMovieService movieService = movieService;
+
+        /// <summary>
+        /// Error handling for the dev environment.
+        /// </summary>
+        /// <param name="hostEnvironment">The host environment.</param>
+        /// <returns>The problem.</returns>
+        [Route("/error-development")]
+        public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
+        {
+            if (!hostEnvironment.IsDevelopment())
+            {
+                return this.NotFound();
+            }
+
+            var exceptionHandlerFeature = this.HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+
+            return this.Problem(
+                detail: exceptionHandlerFeature.Error.StackTrace,
+                title: exceptionHandlerFeature.Error.Message);
+        }
+
+        /// <summary>
+        /// Error handling for production.
+        /// </summary>
+        /// <returns>The problem.</returns>
+        [Route("/error")]
+        public IActionResult HandleError() => this.Problem();
 
         /// <summary>
         /// Search the movies dataset.
@@ -46,10 +74,10 @@ namespace Backend.Controllers
             int pageNumber = 1,
             int pageSize = 10)
         {
-            try // TODO: exception handling
+            try
             {
-                var movies = await this.movieService.Search( // TODO: Use model binding for optional parameters
-                    title, // TODO: Create filter class
+                var movies = await this.movieService.Search(
+                    title,
                     maxResults,
                     genre,
                     actor,
