@@ -25,7 +25,7 @@ namespace Backend.Tests.UnitTests
             .UseInMemoryDatabase(databaseName: "Movies")
             .Options;
 
-            var context = new DBContextClass(options);
+            using var context = new DBContextClass(options);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             context.Movies.AddRange(
@@ -45,6 +45,7 @@ namespace Backend.Tests.UnitTests
 
             movieService = new MovieService(context);
             movieController = new MovieController(movieService);
+
         }
 
         [Fact]
