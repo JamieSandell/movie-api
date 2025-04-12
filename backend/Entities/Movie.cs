@@ -6,10 +6,14 @@ namespace Backend.Entities
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// The movie class.
     /// </summary>
+    [Index(nameof(Title))]
+    [Index(nameof(Genres))]
+    [Index(nameof(Actors))]
     public class Movie
     {
         /// <summary>
