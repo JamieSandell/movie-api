@@ -6,6 +6,7 @@ namespace Backend.Controllers
 {
     using Backend.Entities;
     using Backend.Services;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
@@ -28,6 +29,7 @@ namespace Backend.Controllers
         /// <param name="hostEnvironment">The host environment.</param>
         /// <returns>The problem.</returns>
         [Route("/error-development")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
         {
             if (!hostEnvironment.IsDevelopment())
@@ -47,6 +49,8 @@ namespace Backend.Controllers
         /// </summary>
         /// <returns>The problem.</returns>
         [Route("/error")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [AllowAnonymous]
         public IActionResult HandleError() => this.Problem();
 
         /// <summary>

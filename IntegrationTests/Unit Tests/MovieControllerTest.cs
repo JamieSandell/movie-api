@@ -6,26 +6,18 @@ namespace Backend.Tests.UnitTests
     using Backend.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
 
     public class MovieControllerTest
     {
-        private readonly MovieController movieController;
-        private readonly MovieService movieService;
-
-        public MovieControllerTest()
+        [Fact]
+        public async Task SearchWhenCalledWithNoParametersReturnsOkResult()
         {
-            var services = new ServiceCollection();
-            // Using In-Memory database for testing
-            services.AddDbContext<DBContextClass>(options =>
-                options.UseInMemoryDatabase("MoviesTest"));
-            services.AddScoped<IMovieService, MovieService>();
-
-            var options = new DbContextOptionsBuilder<DBContextClass>()
+            // Arrange
+            DbContextOptions<DBContextClass> options = new DbContextOptionsBuilder<DBContextClass>()
             .UseInMemoryDatabase(databaseName: "Movies")
             .Options;
 
-            using var context = new DBContextClass(options);
+            DBContextClass context = new(options);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             context.Movies.AddRange(
@@ -43,39 +35,92 @@ namespace Backend.Tests.UnitTests
 
             context.SaveChanges();
 
-            movieService = new MovieService(context);
-            movieController = new MovieController(movieService);
+            MovieService movieService = new(context);
+            MovieController movieController = new(movieService);
 
-        }
-
-        [Fact]
-        public async void SearchWhenCalledWithNoParametersReturnsOkResult()
-        {
+            // Act
             var actionResult = await movieController.Search(null, null, null, null, null);            
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var movies = Assert.IsAssignableFrom<IList<Movie>>(okResult.Value).ToList();
 
+            // Assert
             Assert.IsType<ActionResult<IList<Movie>>>(actionResult);
             Assert.NotEmpty(movies);
         }
 
         [Fact]
-        public async void SearchWhenCalledWithInvalidTitleReturnsNotFoundResult()
+        public async Task SearchWhenCalledWithInvalidTitleReturnsNotFoundResult()
         {
+            // Arrange
+            DbContextOptions<DBContextClass> options = new DbContextOptionsBuilder<DBContextClass>()
+            .UseInMemoryDatabase(databaseName: "Movies")
+            .Options;
+
+            DBContextClass context = new(options);
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+            context.Movies.AddRange(
+                new Movie
+                {
+                    Id = 1,
+                    Title = "The Batman",
+                },
+                new Movie
+                {
+                    Id = 2,
+                    Title = "Superman",
+                }
+            );
+
+            context.SaveChanges();
+
+            MovieService movieService = new(context);
+            MovieController movieController = new(movieService);
+
+            // Act
             var actionResult = await movieController.Search("Jamie Sandell", null, null, null, null);
             var badResult = Assert.IsType<NotFoundResult>(actionResult.Result);
 
+            // Assert
             Assert.NotNull(badResult);
             Assert.Equal(404, badResult.StatusCode);
         }
 
         [Fact]
-        public async void SearchWhenCalledWithValidTitleReturnsOkResult()
+        public async Task SearchWhenCalledWithValidTitleReturnsOkResult()
         {
+            // Arrange
+            DbContextOptions<DBContextClass> options = new DbContextOptionsBuilder<DBContextClass>()
+            .UseInMemoryDatabase(databaseName: "Movies")
+            .Options;
+
+            DBContextClass context = new(options);
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+            context.Movies.AddRange(
+                new Movie
+                {
+                    Id = 1,
+                    Title = "The Batman",
+                },
+                new Movie
+                {
+                    Id = 2,
+                    Title = "Superman",
+                }
+            );
+
+            context.SaveChanges();
+
+            MovieService movieService = new(context);
+            MovieController movieController = new(movieService);
+
+            // Act
             var actionResult = await movieController.Search("The Batman", null, null, null, null);
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var movies = Assert.IsAssignableFrom<IList<Movie>>(okResult.Value).ToList();
 
+            // Assert
             Assert.IsType<ActionResult<IList<Movie>>>(actionResult);
             Assert.NotEmpty(movies);
         }
