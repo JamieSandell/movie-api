@@ -4,12 +4,10 @@
 
 namespace Backend
 {
-    using Backend.Config;
     using Backend.Data;
     using Backend.Services;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// The Program and main entry point.
@@ -37,8 +35,6 @@ namespace Backend
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
-            GlobalConfig.Configuration = app.Services.GetService<IConfiguration>();
 
             // Configure the HTTP request pipeline.
             // TODO: Uncomment.

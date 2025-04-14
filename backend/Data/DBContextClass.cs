@@ -4,7 +4,6 @@
 
 namespace Backend.Data
 {
-    using Backend.Config;
     using Backend.Entities;
     using Microsoft.EntityFrameworkCore;
 
@@ -13,17 +12,6 @@ namespace Backend.Data
     /// </summary>
     public class DBContextClass : DbContext
     {
-        private readonly bool isMigration = false;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DBContextClass"/> class.
-        /// Used for migrations.
-        /// </summary>
-        public DBContextClass()
-        {
-            this.isMigration = true;
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DBContextClass"/> class.
         /// </summary>
@@ -52,22 +40,6 @@ namespace Backend.Data
         /// Gets or sets the actors.
         /// </summary>
         public DbSet<Actor> Actors { get; set; }
-
-        /// <summary>
-        /// Configure the database for this context.
-        /// </summary>
-        /// <param name="optionsBuilder">The config.</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (this.isMigration)
-            {
-                _ = optionsBuilder.UseSqlServer(Microsoft
-                   .Extensions
-                   .Configuration
-                   .ConfigurationExtensions
-                   .GetConnectionString(GlobalConfig.Configuration, "LocalConnection")); // TODO: Change to test connection
-            }
-        }
 
         /// <summary>
         /// Configure the relationships.
