@@ -7,7 +7,7 @@ namespace Backend.Tests.UnitTests
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
-    public class MovieControllerTest
+    public class UnitTests
     {
         [Fact]
         public async Task SearchWhenCalledWithNoParametersReturnsOkResult()
