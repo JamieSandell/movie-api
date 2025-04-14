@@ -60,6 +60,19 @@ namespace Backend
                 app.UseExceptionHandler("/error");
             }
 
+            const string policyName = "CorsPolicy";
+            _ = builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: policyName, builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+            _ = app.UseCors(policyName);
+
             app.Run();
         }
     }
